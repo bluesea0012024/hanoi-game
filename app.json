@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "hanoi/hanoi",
+    "certificate/certificate"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#1E88E5",
+    "navigationBarTitleText": "汉诺塔游戏",
+    "navigationBarTextStyle": "white"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "navigateToMiniProgramAppIdList": ["wxddc9184835b90168"]
+}

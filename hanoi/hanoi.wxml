@@ -1,0 +1,90 @@
+<view class="hanoi-page">
+  <view class="header">
+    <!-- 去掉内页标题 -->
+    <!-- <text class="title">汉诺塔</text> -->
+    <text class="subtitle">拖动最上层圆盘，移动到另一根柱子上。小圆盘只能放在比它大的圆盘上。</text>
+  </view>
+
+  <!-- 移除原来的上方控制栏（含“层数：”标签） -->
+  <!--
+  <view class="control-bar">
+    <text>层数：{{numDiscs}}</text>
+    <button class="level-btn" bindtap="openLevelPicker">选择层数</button>
+    <button class="reset-btn" bindtap="resetGame">重新开始</button>
+  </view>
+  -->
+
+  <view class="game-area" id="gameArea">
+    <!-- 三根柱子 -->
+    <view class="peg" style="left: {{pegCenters[0] - pegWidth/2}}px; height: {{pegHeight}}px;"></view>
+    <view class="peg" style="left: {{pegCenters[1] - pegWidth/2}}px; height: {{pegHeight}}px;"></view>
+    <view class="peg" style="left: {{pegCenters[2] - pegWidth/2}}px; height: {{pegHeight}}px;"></view>
+
+    <!-- 圆盘（带编号） -->
+    <block wx:for="{{discs}}" wx:key="id">
+      <view
+        class="disc {{item.dragging ? 'dragging' : ''}}"
+        data-id="{{item.id}}"
+        catchtouchstart="onDiscTouchStart"
+        catchtouchmove="onDiscTouchMove"
+        catchtouchend="onDiscTouchEnd"
+        style="width: {{item.width}}px; height: {{discHeight}}px; left: {{item.x}}px; top: {{item.y}}px; background: {{item.color}}; z-index: {{item.zIndex}};"
+      >
+        <text class="disc-label">{{item.label}}</text>
+      </view>
+    </block>
+
+    <!-- 底座 -->
+    <view class="base"></view>
+  </view>
+
+  <!-- 新增：把两个按钮放到游戏区下方 -->
+  <view class="bottom-controls">
+    <button class="level-btn" bindtap="openLevelPicker">圆盘数量</button>
+    <button class="reset-btn" bindtap="resetGame">重新开始</button>
+  </view>
+  
+  <!-- 小程序导航：一行展示，用“｜”隔开 -->
+  <view class="nav-links">
+    <!-- <navigator url="/pages/index/index" hover-class="none" class="nav-link">认识钟表</navigator> -->
+    <view class="nav-link" bindtap="goToTickClock">认识钟表</view>
+    <text class="nav-sep">｜</text>
+    <view class="nav-link" bindtap="goToNumber99">乘法口诀</view>
+    <text class="nav-sep">｜</text>
+    <view class="nav-link" bindtap="comingSoon">口算练习</view>
+    <text class="nav-sep">｜</text>
+    <view class="nav-link" bindtap="comingSoon">生字预习</view>
+  </view>
+
+  <!-- 使用通用奖状组件：胜利后显示 -->
+  <award-certificate
+    wx:if="{{showCongratsModal}}"
+    nickname="{{nickname}}"
+    title="超级奖状"
+    achievement-text="恭喜你完成汉诺塔！"
+    stats="{{hanoiStats}}"
+    app-name="认识时钟小程序"
+    date="{{currentDate}}"
+    share-text="分享给朋友"
+    return-text="回到首页"
+    nickname-text="修改昵称"
+    bind:share="onCertificateShare"
+    bind:return="onCertificateReturn"
+    bind:nickname="onCertificateNickname"
+  />
+  
+  <!-- 层数选择器弹窗（改为与汉诺塔一致的 overlay/modal 风格） -->
+  <view class="overlay" wx:if="{{showLevelPicker}}">
+    <view class="modal">
+      <view class="modal-title">圆盘数量</view>
+      <view class="level-grid">
+        <block wx:for="{{levelOptions}}" wx:key="*this">
+          <view class="level-item" bindtap="selectLevel" data-level="{{item}}">{{item}}个</view>
+        </block>
+      </view>
+      <view class="modal-actions">
+        <button class="secondary-btn" bindtap="closeLevelPicker">取消</button>
+      </view>
+    </view>
+  </view>
+</view>

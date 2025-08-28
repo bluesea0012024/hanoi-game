@@ -1,0 +1,269 @@
+.hanoi-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 16rpx;
+}
+.title {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #3A7FE0;
+}
+.subtitle {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 26rpx;
+  color: #666;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
+
+.control-bar {
+  margin: 12rpx 0 20rpx;
+}
+.control-bar .reset-btn {
+  margin-top: 8rpx;
+  background: #3A7FE0;
+  color: #fff;
+  border-radius: 12rpx;
+}
+
+.game-area {
+  position: relative;
+  width: 100%;
+  height: 520px; /* 固定像素，便于触摸定位 */
+  background: #FDF7E3; /* 温暖米黄色，适合小朋友 */
+  border-radius: 16rpx;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.base {
+  position: absolute;
+  bottom: 16px;
+  left: 20px;
+  right: 20px;
+  height: 14px;
+  background: #E0CDA9;
+  border-radius: 8px;
+}
+
+.peg {
+  position: absolute;
+  bottom: 30px; /* 放在底座之上 */
+  width: 14px;
+  background: #B0D6FF; /* 柔和蓝柱子 */
+  border-radius: 7px;
+}
+
+.disc {
+  position: absolute;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  transition: box-shadow 0.1s, transform 0.1s;
+}
+.disc.dragging {
+  opacity: 0.95;
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+/* 圆盘编号样式 */
+.disc-label {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26px;
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+}
+
+/* 底部链接 */
+.footer-links {
+  margin-top: 24rpx;
+  text-align: center;
+}
+.footer-links .link {
+  color: #FF6F61;
+  font-size: 28rpx;
+  text-decoration: underline;
+}
+
+/* 弹窗和遮罩层 */
+.overlay {
+  position: fixed;
+  left: 0; right: 0; top: 0; bottom: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.modal {
+  width: 80%;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 28rpx;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+}
+.modal-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #3A7FE0;
+}
+.modal-text {
+  display: block;
+  margin-top: 16rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+/* 层数选择器样式（栅格） */
+.level-grid {
+  display: flex;
+  flex-wrap: wrap;
+  /* 去掉原来的负外边距，改为左右内边距 + 固定列间距 */
+  margin: 24rpx 0 0;
+  padding: 0 16rpx;
+}
+.level-item {
+  /* 固定四列 + 3 个列缝，每个缝 16rpx */
+  width: calc((100% - 3 * 16rpx) / 4);
+  margin-right: 16rpx;
+  margin-bottom: 16rpx;
+  background: #FFB74D;
+  color: #fff;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 96rpx;
+  font-size: 32rpx;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+/* 每行最后一个不留右间距 */
+.level-item:nth-child(4n) {
+  margin-right: 0;
+}
+.modal-cancel {
+  margin-top: 16rpx;
+}
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 16rpx;
+  margin-top: 24rpx;
+}
+.primary-btn {
+  background: #3A7FE0;
+  color: #fff;
+  border-radius: 12rpx;
+  padding: 16rpx;
+}
+.secondary-btn {
+  background: #E0E0E0;
+  color: #333;
+  border-radius: 12rpx;
+  padding: 16rpx;
+}
+
+/* 新增底部按钮区样式 */
+.bottom-controls {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20rpx;
+}
+.level-btn {
+  background: #FFB74D;
+  color: #fff;
+  border-radius: 12rpx;
+  padding: 12rpx 24rpx;
+}
+.reset-btn {
+  background: #3A7FE0;
+  color: #fff;
+  border-radius: 12rpx;
+  padding: 12rpx 24rpx;
+}
+
+/* 层数选择器样式 */
+.level-picker-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.level-picker-content {
+  width: 80%;
+  background: white;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.level-picker-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 30rpx;
+}
+
+.level-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.level-option {
+  width: 120rpx;
+  height: 120rpx;
+  background: #f0f0f0;
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.cancel-btn {
+  width: 60%;
+  background: #f0f0f0;
+  color: #333;
+}
+
+/* 新增：小程序导航条样式（排成一行，蓝色） */
+.nav-links {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;         /* 强制一行 */
+  justify-content: center;   /* 居中 */
+  align-items: center;
+  margin-top: 24rpx;
+  margin-bottom: 24rpx;
+}
+.nav-link {
+  color: #3A7FE0;            /* 蓝色字体 */
+  font-size: 28rpx;
+}
+.nav-sep {
+  margin: 0 12rpx;           /* 分隔符左右留空 */
+  color: #3A7FE0;            /* 与链接同色 */
+  font-size: 28rpx;
+}

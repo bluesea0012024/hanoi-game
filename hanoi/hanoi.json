@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "汉诺塔",
+  "usingComponents": {
+    "award-certificate": "/components/award-certificate/award-certificate"
+  }
+}

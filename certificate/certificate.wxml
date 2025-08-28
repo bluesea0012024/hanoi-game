@@ -1,0 +1,99 @@
+<view class="container">
+  <view class="certificate">
+    <!-- 顶部彩虹装饰 -->
+    <view class="rainbow-top">
+      <view class="rainbow-arc"></view>
+      <view class="sun">☀️</view>
+      <view class="clouds">
+        <view class="cloud">☁️</view>
+        <view class="cloud">☁️</view>
+      </view>
+    </view>
+    
+    <!-- 奖状标题 -->
+    <view class="certificate-header">
+      <view class="title-decoration">
+        <view class="star-left">⭐</view>
+        <text class="certificate-title">超级奖状</text>
+        <view class="star-right">⭐</view>
+      </view>
+    </view>
+    
+    <!-- 奖状内容 -->
+    <view class="certificate-content">
+      <view class="recipient">
+        <view class="crown">👑</view>
+        <text class="name">{{nickname}}小朋友</text>
+        <view class="crown">👑</view>
+      </view>
+      
+      <view class="achievement">
+        <view class="achievement-icon">🎯</view>
+        <text class="achievement-text">
+          {{achievementText}}
+        </text>
+        <view class="achievement-icon">🎯</view>
+      </view>
+      
+      <!-- 统计项改为循环，保证三块等宽等高 -->
+      <view class="stats-container">
+        <block wx:for="{{stats}}" wx:key="index">
+          <view class="stat-item">
+            <view class="stat-icon">{{item.icon}}</view>
+            <view class="stat-label">{{item.label}}</view>
+            <view class="stat-value">{{item.value}}</view>
+          </view>
+        </block>
+      </view>
+    </view>
+    
+    <!-- 底部装饰 -->
+    <view class="bottom-decoration">
+      <view class="balloons">
+        <view class="balloon balloon-red">🎈</view>
+        <view class="balloon balloon-blue">🎈</view>
+        <view class="balloon balloon-yellow">🎈</view>
+      </view>
+      <view class="confetti">
+        <view class="confetti-piece">✨</view>
+        <view class="confetti-piece">✨</view>
+        <view class="confetti-piece">✨</view>
+      </view>
+    </view>
+    
+    <!-- 颁发信息 -->
+    <view class="certificate-footer">
+      <view class="footer-content">
+        <view class="issuer">
+          <view class="app-icon">⏰</view>
+          <text>认识时钟小程序</text>
+        </view>
+        <view class="date">{{currentDate}}</view>
+      </view>
+    </view>
+  </view>
+  
+  <view class="button-group">
+    <button class="btn share-btn" open-type="share">
+      <view class="btn-icon">📤</view>
+      <text>分享给朋友</text>
+    </button>
+    <button class="btn home-btn" bindtap="backToHome">
+      <view class="btn-icon">🏠</view>
+      <text>回到首页</text>
+    </button>
+    <button class="btn nickname-btn" bindtap="modifyNickname">
+      <view class="btn-icon">✏️</view>
+      <text>修改昵称</text>
+    </button>
+  </view>
+  
+  <!-- 昵称修改弹窗 -->
+  <view class="modal" wx:if="{{showNicknameModal}}">
+    <view class="modal-content">
+      <view class="modal-title">修改昵称</view>
+      <input class="nickname-input" value="{{newNickname}}" bindinput="onNicknameInput" placeholder="请输入新昵称" />
+      <button class="btn confirm-btn" bindtap="submitNickname">确认</button>
+    </view>
+  </view>
+</view>
