@@ -83,6 +83,14 @@ Page({
     this.initGame();
   },
 
+  // 新增：查看奖状功能
+  viewCertificate() {
+    // 跳转到奖状页面
+    wx.navigateTo({
+      url: '/certificate/certificate'
+    });
+  },
+
   initGame() {
     const N = this.data.numDiscs;
     const { areaWidth, discHeight, levelGap, colors } = this.data;

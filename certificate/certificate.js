@@ -11,7 +11,9 @@ Page({
     // 新增：来源、成就文案与通用统计项
     source: 'clock',
     achievementText: '恭喜你在时钟练习中表现超棒！',
-    stats: []
+    stats: [],
+    // 新增：用于标识是否从游戏完成跳转过来
+    hasCertificateData: false
   },
 
   onLoad: function(options) {
@@ -21,8 +23,32 @@ Page({
     const d = new Date();
     const currentDate = `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
 
+    // 如果没有传递参数，说明是直接访问证书页面
+    if (!options || Object.keys(options).length === 0) {
+      // 显示提示信息，说明还没有获得证书
+      wx.showToast({
+        title: '暂无证书数据',
+        icon: 'none'
+      });
+      
+      // 设置默认数据
+      this.setData({
+        nickname,
+        currentDate,
+        hasCertificateData: false,
+        achievementText: '完成汉诺塔挑战即可获得奖状！',
+        stats: [
+          { icon: '⏱️', label: '用时', value: '--' },
+          { icon: '🏆', label: '步数', value: '--' },
+          { icon: '🎖️', label: '称号', value: '汉诺塔小达人' }
+        ]
+      });
+      return;
+    }
+
     const source = (options && options.source) || 'clock';
     let achievementText = (options && options.achievement) ? decodeURIComponent(options.achievement) : '恭喜你在时钟练习中表现超棒！';
+    this.setData({ hasCertificateData: true });
 
     if (source === 'hanoi') {
       // 汉诺塔模式：用时 + 步数 + 称号
@@ -95,7 +121,7 @@ Page({
   // 返回首页
   backToHome: function() {
     wx.navigateBack({
-      delta: 2 // 返回两层，回到首页
+      delta: 1 // 返回上一页
     });
   },
 

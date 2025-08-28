@@ -182,13 +182,23 @@
   background: #FFB74D;
   color: #fff;
   border-radius: 12rpx;
-  padding: 12rpx 24rpx;
+  padding: 8rpx 16rpx; /* Reduced padding */
+  font-size: 28rpx; /* Smaller font size */
 }
 .reset-btn {
   background: #3A7FE0;
   color: #fff;
   border-radius: 12rpx;
-  padding: 12rpx 24rpx;
+  padding: 8rpx 16rpx; /* Reduced padding */
+  font-size: 28rpx; /* Smaller font size */
+}
+/* 新增查看奖状按钮样式 */
+.certificate-btn {
+  background: #9575CD;
+  color: #fff;
+  border-radius: 12rpx;
+  padding: 8rpx 16rpx; /* Reduced padding */
+  font-size: 28rpx; /* Smaller font size */
 }
 
 /* 层数选择器样式 */

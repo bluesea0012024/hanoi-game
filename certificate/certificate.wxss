@@ -411,3 +411,48 @@
   background: linear-gradient(135deg, #4ECDC4, #44A08D);
   color: white;
 }
+
+/* 无证书数据提示 */
+.no-certificate-tip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.tip-content {
+  width: 80%;
+  background: linear-gradient(135deg, #FFF9E6, #FFF5F5);
+  border-radius: 20rpx;
+  padding: 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 3rpx solid #FF6B9D;
+  text-align: center;
+}
+
+.tip-icon {
+  font-size: 60rpx;
+  margin-bottom: 20rpx;
+}
+
+.tip-text {
+  font-size: 32rpx;
+  color: #333;
+  margin-bottom: 30rpx;
+  line-height: 1.5;
+}
+
+.play-btn {
+  width: 60%;
+  background: linear-gradient(135deg, #4ECDC4, #44A08D);
+  color: white;
+  margin-top: 20rpx;
+}
