@@ -66,7 +66,7 @@
       <view class="footer-content">
         <view class="issuer">
           <view class="app-icon">⏰</view>
-          <text>认识时钟小程序</text>
+          <text>汉诺塔小程序</text>
         </view>
         <view class="date">{{currentDate}}</view>
       </view>

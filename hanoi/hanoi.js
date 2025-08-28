@@ -283,20 +283,6 @@ Page({
   },
 
   // 奖状按钮事件
-  onCertificatePrimary() {
-    // 跳转到小程序首页
-    wx.navigateToMiniProgram({
-      appId: 'wx4f87b8582ddf6b04', // 需要替换为小程序的实际appid
-      path: 'pages/hanoi/hanoi',
-      success: () => {},
-      fail: () => {
-        wx.showToast({ title: '跳转失败', icon: 'none' });
-      }
-    });
-  },
-  onCertificateSecondary() {
-    this.setData({ showCongratsModal: false }, () => this.initGame());
-  },
   onCertificateReturn() {
     // 跳转到认识时钟小程序
     wx.navigateToMiniProgram({
@@ -331,7 +317,7 @@ Page({
       icon: 'none'
     });
   },
-  // 跳转到认识时钟小程序
+  // 跳转到汉诺塔小程序
   goToTickClock: function() {
     wx.navigateToMiniProgram({
       appId: 'wxddc9184835b90168', // 汉诺塔小程序appid

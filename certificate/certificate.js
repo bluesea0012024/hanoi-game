@@ -10,7 +10,7 @@ Page({
     newNickname: '',
     // 新增：来源、成就文案与通用统计项
     source: 'clock',
-    achievementText: '恭喜你在时钟练习中表现超棒！',
+    achievementText: '恭喜你在汉诺塔练习中表现超棒！',
     stats: [],
     // 新增：用于标识是否从游戏完成跳转过来
     hasCertificateData: false
@@ -47,7 +47,7 @@ Page({
     }
 
     const source = (options && options.source) || 'clock';
-    let achievementText = (options && options.achievement) ? decodeURIComponent(options.achievement) : '恭喜你在时钟练习中表现超棒！';
+    let achievementText = (options && options.achievement) ? decodeURIComponent(options.achievement) : '恭喜你在汉诺塔练习中表现超棒！';
     this.setData({ hasCertificateData: true });
 
     if (source === 'hanoi') {
@@ -165,7 +165,7 @@ Page({
     const { nickname, source } = this.data;
     const title = source === 'hanoi'
       ? `${nickname}完成了汉诺塔挑战并获得奖状！`
-      : `${nickname}在认识时钟小程序中获得了奖状！`;
+      : `${nickname}在汉诺塔小程序中获得了奖状！`;
     const path = source === 'hanoi' ? '/hanoi/hanoi' : '/pages/index/index';
     return {
       title,
